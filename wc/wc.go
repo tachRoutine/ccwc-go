@@ -3,17 +3,17 @@ package wc
 import "os"
 
 type FileStats struct {
-	bytes          int64
-	lineBreakCount int64
-	wordCount      int64
-	charsCount     int64
+	Bytes          int64
+	LineBreakCount int64
+	WordCount      int64
+	CharsCount     int64
 }
 
 func GetFileStats(file *os.File) FileStats {
 	return FileStats{
-		bytes: 0,
-		lineBreakCount: 0,
-		wordCount: 0,
-		charsCount: 0,
+		Bytes: 0,
+		LineBreakCount: 0,
+		WordCount: 0,
+		CharsCount: 0,
 	}
 }
