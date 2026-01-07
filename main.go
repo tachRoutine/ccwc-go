@@ -3,9 +3,12 @@ package main
 import (
 	"ccwc/wc"
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"strconv"
+	"strings"
+
 )
 
 func main() {
@@ -19,6 +22,7 @@ func main() {
 	flag.Parse()
 	
 	filename := flag.CommandLine.Arg(0)
+	
 	if !printLineBreaks && !printWords && !printChars && !printBytes {
 		printLineBreaks = true
 		printWords = true
@@ -32,7 +36,7 @@ func main() {
 	}
 
 	var file *os.File
-	if (stat.Mode() && os.ModeCharDevice) == 0 {
+	if (stat.Mode() & os.ModeCharDevice) == 0 {
 		file = os.Stdin
 	} else {
 		file, err = os.Open(filename)
@@ -60,4 +64,7 @@ func main() {
 	if printBytes {
 		cols = append(cols, strconv.FormatInt(fStats.Bytes, 10))
 	}
+	
+	cols = append(cols, filename)
+	fmt.Println(strings.Join(cols," "))
 }
